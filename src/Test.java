@@ -1,28 +1,18 @@
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Test {
 
     public static void main(String[] args) {
-        File folder = new File("/home/sepehr/Downloads");
+        File folder = new File("/home/sepehr/Downloads/");
         ArrayList<String> realFiles = new ArrayList<>();
+        ArrayList<String> paths = new ArrayList<>();
         System.out.println(System.currentTimeMillis());
-        fileFinder(folder, realFiles);
+        new RecursiveFileImporter(folder, realFiles, paths);
         System.out.println(System.currentTimeMillis());
-        for (String realFile : realFiles) {
+        for (String realFile : paths) {
             System.out.println(realFile);
         }
         System.out.println(realFiles.size());
-    }
-
-    private static void fileFinder(File file, ArrayList<String> files) {
-        for (File subFile : Objects.requireNonNull(file.listFiles())) {
-            if (subFile.isFile()) {
-                files.add(subFile.getName());
-            } else if (subFile.isDirectory()) {
-                fileFinder(subFile, files);
-            }
-        }
     }
 }
