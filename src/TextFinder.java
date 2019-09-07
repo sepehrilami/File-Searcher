@@ -25,11 +25,13 @@ class TextFinder {
             File file = new File(path);
             try {
                 BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
-                String fileData = bufferedReader.readLine();
-                for (String string : fileData.split(" ")) {
-                    //System.out.println(string);
-                    this.getData().putIfAbsent(string, new HashSet<>());
-                    this.getData().get(string).add(file.getName());
+                String fileData;
+                while((fileData = bufferedReader.readLine()) != null) {
+                    for (String string : fileData.split(" ")) {
+                        //System.out.println(string);
+                        this.getData().putIfAbsent(string, new HashSet<>());
+                        this.getData().get(string).add(file.getName());
+                    }
                 }
             } catch (IOException e) {
                 e.printStackTrace();
