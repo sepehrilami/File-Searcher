@@ -1,10 +1,12 @@
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.HashSet;
 
-public class TextFinder {
+class TextFinder {
 
-    public HashMap<String, ArrayList<String>> data = new HashMap<>();
+    private HashMap<String, HashSet<String>> data = new HashMap<>();
 
+    HashMap<String, HashSet<String>> getData() {
+        return data;
+    }
 
 }
