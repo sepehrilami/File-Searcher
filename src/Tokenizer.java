@@ -1,6 +1,4 @@
 public interface Tokenizer {
 
-    static void tokenize() {
-
-    }
+    void tokenize();
 }

@@ -1,12 +1,11 @@
+import java.io.File;
 import java.util.Scanner;
 
-public class Main {
+public class Main implements SearchType  {
 
-    public static void main(String[] args) {
-        TextFinder textFinder = new TextFinder();
-        Importer importer = null;
-        Tokenizer tokenizer = null;
-        textFinder.preprocess(importer, tokenizer);
+    public static void main(String[] args){
+        TextFinder textFinder = new TextFinder(new File("/home/sepehr/Downloads/test_files"));
+        textFinder.preprocess();
         searchBar(textFinder);
     }
 

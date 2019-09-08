@@ -9,25 +9,29 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
-class TextFinder {
+class TextFinder implements Tokenizer {
 
-    private File folder = new File("/home/sepehr/Downloads/test_files");
-    private ArrayList<String> paths = new ArrayList<>();
     private HashMap<String, HashSet<String>> data = new HashMap<>();
+    private ArrayList<String> paths;
 
     HashMap<String, HashSet<String>> getData() {
         return data;
     }
 
-    void preprocess(Importer importer, Tokenizer tokenizer) {
+    TextFinder(File folder) {
+        RecursiveFileImporter recursiveFileImporter = new RecursiveFileImporter(folder);
+        paths = recursiveFileImporter.readAllFiles();
+    }
+
+
+    void preprocess() {
         System.out.println(System.currentTimeMillis());
-        RecursiveFileImporter recursiveFileImporter = new RecursiveFileImporter();
-        recursiveFileImporter.readAllFiles(folder, paths);
-        tokenCreate(paths);
+        tokenize();
         System.out.println(System.currentTimeMillis());
     }
 
-    private void tokenCreate(ArrayList<String> paths) {
+    @Override
+    public void tokenize() {
         for (String path : paths) {
             File file = new File(path);
             try (BufferedReader ignored = new BufferedReader(new FileReader(file))) {

@@ -1,6 +1,7 @@
+import java.util.ArrayList;
+
 public interface Importer {
 
-    static void importData() {
+    ArrayList<String> readAllFiles();
 
-    }
 }
