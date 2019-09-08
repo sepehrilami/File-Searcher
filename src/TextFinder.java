@@ -22,7 +22,7 @@ class TextFinder {
     void preprocess(Importer importer, Tokenizer tokenizer) {
         System.out.println(System.currentTimeMillis());
         RecursiveFileImporter recursiveFileImporter = new RecursiveFileImporter();
-        ArrayList<String> realFiles = recursiveFileImporter.readAllFiles(folder, paths);
+        recursiveFileImporter.readAllFiles(folder, paths);
         tokenCreate(paths);
         System.out.println(System.currentTimeMillis());
     }
@@ -33,6 +33,7 @@ class TextFinder {
             try (BufferedReader ignored = new BufferedReader(new FileReader(file))) {
 
                 String fileData = new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
+
                 for (String string : fileData.split(" ")) {
                     this.getData().putIfAbsent(string, new HashSet<>());
                     this.getData().get(string).add(file.getName());
