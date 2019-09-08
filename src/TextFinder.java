@@ -37,7 +37,6 @@ class TextFinder {
 
                 String fileData = new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
                 for (String string : fileData.split(" ")) {
-                    //System.out.println(string);
                     this.getData().putIfAbsent(string, new HashSet<>());
                     this.getData().get(string).add(file.getName());
                 }

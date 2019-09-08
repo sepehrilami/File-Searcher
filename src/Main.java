@@ -12,8 +12,8 @@ public class Main {
             System.out.println("enter your word:");
             String input = scanner.next();
             System.out.println("Files containing this word:\n");
-            if (textFinder.getData().get(input) != null) {
-                System.out.println(textFinder.getData().get(input));
+            if (textFinder.getData().get(input.toLowerCase()) != null) {
+                System.out.println(textFinder.getData().get(input.toLowerCase()) + "\n");
             } else {
                 System.out.println("Oops! We didn't find any file.\nTry something else!");
             }
