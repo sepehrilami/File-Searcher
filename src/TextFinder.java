@@ -11,6 +11,8 @@ import java.util.HashSet;
 
 class TextFinder {
 
+    private File folder = new File("/home/sepehr/Downloads/test_files");
+    private ArrayList<String> paths = new ArrayList<>();
     private HashMap<String, HashSet<String>> data = new HashMap<>();
 
     HashMap<String, HashSet<String>> getData() {
@@ -18,16 +20,11 @@ class TextFinder {
     }
 
     void preprocess(Importer importer, Tokenizer tokenizer) {
-        File folder = new File("/home/sepehr/Downloads/test_files");
-        ArrayList<String> realFiles;
-        ArrayList<String> paths = new ArrayList<>();
         System.out.println(System.currentTimeMillis());
         RecursiveFileImporter recursiveFileImporter = new RecursiveFileImporter();
-        realFiles = recursiveFileImporter.readAllFiles(folder, paths);
+        ArrayList<String> realFiles = recursiveFileImporter.readAllFiles(folder, paths);
         tokenCreate(paths);
         System.out.println(System.currentTimeMillis());
-        System.out.println(this.getData().values().size());
-        System.out.println(realFiles.size());
     }
 
     private void tokenCreate(ArrayList<String> paths) {
@@ -40,7 +37,7 @@ class TextFinder {
                     this.getData().putIfAbsent(string, new HashSet<>());
                     this.getData().get(string).add(file.getName());
                 }
-            } catch(IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
