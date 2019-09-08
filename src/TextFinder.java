@@ -8,8 +8,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Scanner;
 
-class TextFinder implements Tokenizer {
+class TextFinder implements Tokenizer, SearchType {
 
     private HashMap<String, HashSet<String>> data = new HashMap<>();
     private ArrayList<String> paths;
@@ -44,6 +45,25 @@ class TextFinder implements Tokenizer {
                 }
             } catch (IOException e) {
                 e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public void searchBar() {
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            System.out.println("enter your word:");
+            String input = scanner.next();
+            if (input.equalsIgnoreCase("exittt")) {
+                System.out.println("FINISHED!");
+                break;
+            }
+            System.out.println("Files containing this word:\n");
+            if (this.getData().get(input.toLowerCase()) != null) {
+                System.out.println(this.getData().get(input.toLowerCase()) + "\n");
+            } else {
+                System.out.println("Oops! We didn't find any file.\nTry something else!");
             }
         }
     }
