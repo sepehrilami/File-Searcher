@@ -1,4 +1,4 @@
 public interface SearchType {
 
-    void searchBar();
+    void searchBar(String input);
 }
