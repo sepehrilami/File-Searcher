@@ -18,8 +18,8 @@ public class ExactTokenizer implements Tokenizer {
                 String fileData = new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
 
                 for (String string : fileData.split(" ")) {
-                    textFinder.getData().putIfAbsent(string, new HashSet<>());
-                    textFinder.getData().get(string).add(file.getName());
+                    textFinder.getData().putIfAbsent(string.toLowerCase(), new HashSet<>());
+                    textFinder.getData().get(string.toLowerCase()).add(file.getName());
                 }
             } catch (IOException e) {
                 e.printStackTrace();
