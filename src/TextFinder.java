@@ -6,8 +6,8 @@ class TextFinder implements SearchType {
     private HashMap<String, HashSet<String>> data = new HashMap<>();
 
     private ArrayList<String> paths;
-    private ExactTokenizer tokenizer;
-    private RecursiveFileImporter importer;
+    private Tokenizer tokenizer;
+    private Importer importer;
 
     HashMap<String, HashSet<String>> getData() {
         return data;
@@ -18,14 +18,14 @@ class TextFinder implements SearchType {
     }
 
     TextFinder(Importer importer, Tokenizer exactTokenizer) {
-        this.importer = (RecursiveFileImporter) importer;
-        this.tokenizer = (ExactTokenizer) exactTokenizer;
+        this.importer = importer;
+        this.tokenizer = exactTokenizer;
     }
 
 
     void preprocess(File folder) {
         System.out.println(System.currentTimeMillis());
-        paths = importer.readAllFiles(folder);
+        paths = importer.importer(folder);
         tokenizer.tokenize(this);
         System.out.println(System.currentTimeMillis());
     }

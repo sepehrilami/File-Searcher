@@ -3,6 +3,6 @@ import java.util.ArrayList;
 
 public interface Importer {
 
-    ArrayList<String> readAllFiles(File folder);
+    ArrayList<String> importer(File folder);
 
 }
