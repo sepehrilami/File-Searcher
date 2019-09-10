@@ -1,4 +1,4 @@
 public interface Tokenizer {
 
-    void tokenize();
+    void tokenize(TextFinder textFinder);
 }

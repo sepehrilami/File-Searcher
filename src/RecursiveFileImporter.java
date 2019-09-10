@@ -17,5 +17,4 @@ class RecursiveFileImporter implements Importer {
         }
         return paths;
     }
-
 }
