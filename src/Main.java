@@ -15,6 +15,6 @@ public class Main {
     private static String getString() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("enter your word:");
-        return scanner.next();
+        return scanner.nextLine();
     }
 }

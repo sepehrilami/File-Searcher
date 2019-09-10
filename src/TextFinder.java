@@ -1,15 +1,13 @@
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.*;
 
-class TextFinder implements  SearchType {
+class TextFinder implements SearchType {
 
     private HashMap<String, HashSet<String>> data = new HashMap<>();
 
     private ArrayList<String> paths;
-    private ExactTokenizer exactTokenizer;
-    private  RecursiveFileImporter recursiveFileImporter;
+    private ExactTokenizer tokenizer;
+    private RecursiveFileImporter importer;
 
     HashMap<String, HashSet<String>> getData() {
         return data;
@@ -19,16 +17,16 @@ class TextFinder implements  SearchType {
         return paths;
     }
 
-    TextFinder( RecursiveFileImporter recursiveFileImporter , ExactTokenizer exactTokenizer) {
-        this.recursiveFileImporter = recursiveFileImporter;
-        this.exactTokenizer = exactTokenizer;
+    TextFinder(Importer importer, Tokenizer exactTokenizer) {
+        this.importer = (RecursiveFileImporter) importer;
+        this.tokenizer = (ExactTokenizer) exactTokenizer;
     }
 
 
     void preprocess(File folder) {
         System.out.println(System.currentTimeMillis());
-        paths = recursiveFileImporter.readAllFiles(folder);
-        exactTokenizer.tokenize(this);
+        paths = importer.readAllFiles(folder);
+        tokenizer.tokenize(this);
         System.out.println(System.currentTimeMillis());
     }
 
@@ -36,10 +34,24 @@ class TextFinder implements  SearchType {
     @Override
     public void searchBar(String input) {
         System.out.println("Files containing this word:\n");
-        if (this.getData().get(input.toLowerCase()) != null) {
-            System.out.println(this.getData().get(input.toLowerCase()) + "\n");
-        } else {
-            System.out.println("Oops! We didn't find any file.\nTry something else!");
+        ArrayList<Set<String>> listOfListOfFiles = new ArrayList<>();
+        String[] words = input.split(" ");
+        for (String word : words) {
+            System.out.println(word);
+            if (this.getData().get(word.toLowerCase()) != null) {
+                System.out.println(this.getData().get(word.toLowerCase()) + "\n");
+                listOfListOfFiles.add(this.getData().get(word.toLowerCase()));
+            } else {
+                System.out.println("Oops! We didn't find any file.\nTry something else!");
+            }
+
+        }
+        if (listOfListOfFiles.size() > 0) {
+            Set<String> intersection = listOfListOfFiles.get(0);
+            for (Set<String> scan : listOfListOfFiles.subList(1, listOfListOfFiles.size())) {
+                intersection.retainAll(scan);
+            }
+            System.out.println("total:\n" + intersection);
         }
     }
 }
