@@ -25,7 +25,7 @@ class TextFinder implements SearchType {
         return paths;
     }
 
-    TextFinder(Importer importer, Tokenizer tokenizer , Tokenizer searchTokenizer) {
+    TextFinder(Importer importer, Tokenizer tokenizer, Tokenizer searchTokenizer) {
         this.importer = importer;
         this.tokenizer = tokenizer;
         this.searchTokenizer = searchTokenizer;
@@ -35,13 +35,13 @@ class TextFinder implements SearchType {
         System.out.println(System.currentTimeMillis());
         paths = importer.importData(folder);
         for (String path : this.getPaths()) {
-            tokenizer.tokenize(path , this.getData());
+            tokenizer.tokenize(path, this.getData());
         }
         System.out.println(System.currentTimeMillis());
     }
 
     @Override
     public Set<String> search(String input) {
-        return searchTokenizer.tokenize(input , this.getData());
+        return searchTokenizer.tokenize(input, this.getData());
     }
 }

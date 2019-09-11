@@ -8,7 +8,7 @@ public class Main {
         RecursiveFileImporter recursiveFileImporter = new RecursiveFileImporter();
         ExactTokenizer exactTokenizer = new ExactTokenizer();
         InputTokenizer inputTokenizer = new InputTokenizer();
-        TextFinder textFinder = new TextFinder(recursiveFileImporter, exactTokenizer , inputTokenizer);
+        TextFinder textFinder = new TextFinder(recursiveFileImporter, exactTokenizer, inputTokenizer);
         textFinder.preprocess(new File("/home/sepehr/Downloads/test_files"));
         String input = getString();
         Set<String> fileNames = textFinder.search(input);
