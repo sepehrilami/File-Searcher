@@ -17,6 +17,10 @@ class TextFinder implements SearchType {
         return data;
     }
 
+    public Tokenizer getSearchTokenizer() {
+        return searchTokenizer;
+    }
+
     public ArrayList<String> getPaths() {
         return paths;
     }
@@ -36,9 +40,8 @@ class TextFinder implements SearchType {
         System.out.println(System.currentTimeMillis());
     }
 
-
     @Override
     public Set<String> search(String input) {
-        return searchTokenizer.tokenizeInput(input , this.getData());
+        return searchTokenizer.tokenize(input , this.getData());
     }
 }
