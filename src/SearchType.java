@@ -1,4 +1,6 @@
+import java.util.Set;
+
 public interface SearchType {
 
-    void searchBar(String input);
+    Set<String> search(String input);
 }
