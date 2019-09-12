@@ -7,7 +7,6 @@ class TextFinder implements SearchType {
 
     private HashMap<String, HashSet<String>> data = new HashMap<>();
 
-    private ArrayList<String> paths;
     private Tokenizer tokenizer;
     private Tokenizer searchTokenizer;
     private Importer importer;
@@ -20,10 +19,6 @@ class TextFinder implements SearchType {
         return searchTokenizer;
     }
 
-    public ArrayList<String> getPaths() {
-        return paths;
-    }
-
     TextFinder(Importer importer, Tokenizer tokenizer, Tokenizer searchTokenizer) {
         this.importer = importer;
         this.tokenizer = tokenizer;
@@ -32,7 +27,7 @@ class TextFinder implements SearchType {
 
     void preprocess() {
         System.out.println(System.currentTimeMillis());
-        HashMap<String , String> allTexts;
+        HashMap<String, String> allTexts;
         allTexts = importer.importData();
         for (String name : allTexts.keySet()) {
             HashSet<String> tokens = tokenizer.tokenize(allTexts.get(name));

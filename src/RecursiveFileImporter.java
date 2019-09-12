@@ -7,12 +7,11 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Objects;
 
 class RecursiveFileImporter implements Importer {
 
-    private ArrayList<String> texts = new ArrayList<>();
+    HashMap<String, String> titleAndTexts = new HashMap<>();
     private File file;
     ArrayList<String> paths = new ArrayList<>();
 
@@ -23,13 +22,12 @@ class RecursiveFileImporter implements Importer {
 
     @Override
     public HashMap<String, String> importData() {
-        HashMap<String, String> titleAndTexts = new HashMap<>();
         for (File subFile : Objects.requireNonNull(file.listFiles())) {
             if (subFile.isFile()) {
                 paths.add(subFile.getPath());
                 try (BufferedReader ignored = new BufferedReader(new FileReader(subFile))) {
                     String fileData = new String(Files.readAllBytes(Paths.get(subFile.getPath())), StandardCharsets.UTF_8);
-                    titleAndTexts.putIfAbsent(subFile.getName() , fileData);
+                    titleAndTexts.putIfAbsent(subFile.getName(), fileData);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
