@@ -1,10 +1,3 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -39,22 +32,13 @@ class TextFinder implements SearchType {
 
     void preprocess() {
         System.out.println(System.currentTimeMillis());
-        paths = importer.importData();
-        for (String path : this.getPaths()) {
-            File file = new File(path);
-            try (BufferedReader ignored = new BufferedReader(new FileReader(file))) {
-
-                String fileData = new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
-
-                HashSet<String> tokens = tokenizer.tokenize(fileData);
-
-                for (String string : tokens) {
-                    data.putIfAbsent(string.toLowerCase(), new HashSet<>());
-                    data.get(string.toLowerCase()).add(file.getName());
-                }
-
-            } catch (IOException e) {
-                e.printStackTrace();
+        HashMap<String , String> allTexts;
+        allTexts = importer.importData();
+        for (String name : allTexts.keySet()) {
+            HashSet<String> tokens = tokenizer.tokenize(allTexts.get(name));
+            for (String string : tokens) {
+                data.putIfAbsent(string.toLowerCase(), new HashSet<>());
+                data.get(string.toLowerCase()).add(name);
             }
         }
         System.out.println(System.currentTimeMillis());
