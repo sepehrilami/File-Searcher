@@ -4,5 +4,5 @@ import java.util.Set;
 
 public interface Tokenizer {
 
-    Set<String> tokenize(String path, HashMap<String, HashSet<String>> data);
+    HashSet<String> tokenize(String fileData);
 }

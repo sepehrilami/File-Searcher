@@ -4,15 +4,23 @@ import java.util.Objects;
 
 class RecursiveFileImporter implements Importer {
 
-    private ArrayList<String> paths = new ArrayList<>();
+    private ArrayList<String> texts = new ArrayList<>();
+    private File file;
+    ArrayList<String> paths = new ArrayList<>();
+
+    public RecursiveFileImporter(File file) {
+        this.file = file;
+        importData();
+    }
 
     @Override
-    public ArrayList<String> importData(File file) {
+    public ArrayList<String> importData() {
         for (File subFile : Objects.requireNonNull(file.listFiles())) {
             if (subFile.isFile()) {
                 paths.add(subFile.getPath());
             } else if (subFile.isDirectory()) {
-                importData(subFile);
+                this.file = subFile;
+                importData();
             }
         }
         return paths;
