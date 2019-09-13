@@ -1,4 +1,5 @@
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
 
 public class InputTokenizer implements Tokenizer {
 

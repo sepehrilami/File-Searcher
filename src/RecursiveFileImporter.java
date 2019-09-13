@@ -11,9 +11,9 @@ import java.util.Objects;
 
 class RecursiveFileImporter implements Importer {
 
-    HashMap<String, String> titleAndTexts = new HashMap<>();
+    private HashMap<String, String> titleAndTexts = new HashMap<>();
     private File file;
-    ArrayList<String> paths = new ArrayList<>();
+    private ArrayList<String> paths = new ArrayList<>();
 
     public RecursiveFileImporter(File file) {
         this.file = file;
