@@ -1,11 +1,8 @@
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -13,7 +10,6 @@ class RecursiveFileImporter implements Importer {
 
     private HashMap<String, String> titleAndTexts = new HashMap<>();
     private File file;
-    private ArrayList<String> paths = new ArrayList<>();
 
     public RecursiveFileImporter(File file) {
         this.file = file;
@@ -24,13 +20,13 @@ class RecursiveFileImporter implements Importer {
     public HashMap<String, String> importData() {
         for (File subFile : Objects.requireNonNull(file.listFiles())) {
             if (subFile.isFile()) {
-                paths.add(subFile.getPath());
-                try (BufferedReader ignored = new BufferedReader(new FileReader(subFile))) {
-                    String fileData = new String(Files.readAllBytes(Paths.get(subFile.getPath())), StandardCharsets.UTF_8);
-                    titleAndTexts.putIfAbsent(subFile.getName(), fileData);
+                String fileData = null;
+                try {
+                    fileData = new String(Files.readAllBytes(Paths.get(subFile.getPath())), StandardCharsets.UTF_8);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                titleAndTexts.putIfAbsent(subFile.getName(), fileData);
             } else if (subFile.isDirectory()) {
                 this.file = subFile;
                 importData();

@@ -30,7 +30,7 @@ class TextFinder implements SearchType {
         HashMap<String, String> allTexts;
         allTexts = importer.importData();
         for (String name : allTexts.keySet()) {
-            HashSet<String> tokens = tokenizer.tokenize(allTexts.get(name));
+            Set<String> tokens = tokenizer.tokenize(allTexts.get(name));
             for (String string : tokens) {
                 data.putIfAbsent(string.toLowerCase(), new HashSet<>());
                 data.get(string.toLowerCase()).add(name);
@@ -41,7 +41,7 @@ class TextFinder implements SearchType {
 
     @Override
     public Set<String> search(String input) {
-        HashSet<String> words = searchTokenizer.tokenize(input);
+        Set<String> words = searchTokenizer.tokenize(input);
         ArrayList<Set<String>> listOfListOfFiles = new ArrayList<>();
         for (String word : words) {
             System.out.println(word);
