@@ -13,7 +13,6 @@ class RecursiveFileImporter implements Importer {
 
     public RecursiveFileImporter(File file) {
         this.file = file;
-        importData();
     }
 
     @Override
